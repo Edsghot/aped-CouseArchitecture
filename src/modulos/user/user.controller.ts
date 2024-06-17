@@ -24,29 +24,25 @@ export class UserController {
         return await this.userService.getAllUsers();
     }
 
-    @Get(':id')
+    @Get('/getById/:id')
     async getUserById(@Param('id') id: number) {
         return await this.userService.getUserById(id);
     }
 
-    @Delete(':id')
+    @Delete('/delete/:id')
     async deleteUser(@Param('id') id: number) {
         return await this.userService.deleteUser(id);
     }
 
     @Post('login')
     async login(@Body() loginDto: LoginDto) {
-        // Valida la instancia del DTO
         const errors = await validate(loginDto);
     
-        // Si hay errores de validación, lanza un error con los detalles
         if (errors.length > 0) {
             const errorMessage = errors.map(error => Object.values(error.constraints)).join(', ');
         
             return {msg: "Error de datos de ingreso", detailMsg:errorMessage }
         }
-    
-        // Si la validación es exitosa, procede con la lógica de inicio de sesión
         return await this.userService.login(loginDto.UserRequest, loginDto.Password);
     }
 }
