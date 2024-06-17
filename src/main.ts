@@ -10,6 +10,7 @@ async function bootstrap() {
       optionsSuccessStatus: 204,
     },
   });
-  await app.listen(3000);
+  const port = process.env.PORT || 5036;
+  await app.listen(port);
 }
 bootstrap();
