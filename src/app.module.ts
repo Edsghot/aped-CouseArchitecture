@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UserModule } from './modulos/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CourseModule } from './modulos/course/course.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -12,7 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     database: 'nibcqvah_CourseArchitecture',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true
-}),UserModule],
+}),UserModule, CourseModule],
   controllers: [],
   providers: [ ],
 })
