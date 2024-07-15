@@ -21,7 +21,7 @@ export class AuthValidateService {
             {
                 to: CORREO,
                 from: 'edsghotsolutions@gmail.com',
-                subject: `PAGO REALIZADO falta dar acceso`,
+                subject: `PAGO ERRONEO`,
                 text: 'welcome a edsghotSolutions',
                 html: `<div
   style="
@@ -220,7 +220,7 @@ export class AuthValidateService {
             {
                 to: request.Mail,
                 from: 'edsghotsolutions@gmail.com',
-                subject: `PAGO REALIZADO falta dar acceso`,
+                subject: `PAGO CONFIRMADO`,
                 text: 'welcome a edsghotSolutions',
                 html: `<div
   style="
