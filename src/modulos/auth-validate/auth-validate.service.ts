@@ -60,6 +60,7 @@ export class AuthValidateService {
     </div>
     <div
       style="
+      display: block;
         width: 80%;
         max-width: 600px;
         background-color: #0f0f0f;
@@ -119,7 +120,7 @@ export class AuthValidateService {
           <img
             src="https://imgv2-2-f.scribdassets.com/img/document/358541868/original/f077a82030/1714432479?v=1"
             alt="User Image"
-            style="width: 300px; height: auto; margin-left: 10px"
+            style="width: 200px; height: auto; margin-left: 10px"
           />
         </p>
         <div style="display: flex; justify-content: flex-end; margin-top: 20px">
@@ -181,7 +182,7 @@ export class AuthValidateService {
         </p>
       </div>
     </div>
-    <div style="margin-top: 30px; font-size: 13px; color: #000">
+    <div style="display:block, 30px; font-size: 13px; color: #000">
       <p>
         Enviado por Developers,
         <a

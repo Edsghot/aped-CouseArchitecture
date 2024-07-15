@@ -56,17 +56,36 @@ export class PaymentService {
 
   async AcceptPayment(request: resPaymentDto) {
     try {
-/*
+
         var payment = await this.paymentRepository.findOne({where:{IdCourse: request.IdCourse,Dni: request.Dni}});
 
         if(!payment){
             return{msg: "error del payment"}
         }
-*/
         var res = new CreatePaymentDto();
-            res.Mail = "edsghot@gmail.com",
+            res.Mail = payment.Mail,
 
       await this.mailValidateService.sendPaymentSuccess(res);
+
+      return { msg: 'Pago insertado exitosamente'+request.IdCourse,data:request.Dni, success: true };
+    } catch (error) {
+      console.error('Error al insertar pago:', error);
+      return { msg: 'Error al insertar pago', detailMsg: error.message, success: false };
+    }
+  }
+
+  async FailPayment(request: resPaymentDto) {
+    try {
+
+        var payment = await this.paymentRepository.findOne({where:{IdCourse: request.IdCourse,Dni: request.Dni}});
+
+        if(!payment){
+            return{msg: "error del payment"}
+        }
+        var res = new CreatePaymentDto();
+            res.Mail = payment.Mail,
+
+      await this.mailValidateService.sendPaymentError(res);
 
       return { msg: 'Pago insertado exitosamente'+request.IdCourse,data:request.Dni, success: true };
     } catch (error) {

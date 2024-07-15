@@ -29,6 +29,12 @@ export class PaymentController {
     async success(@Param() params: resPaymentDto) {
         return await this.paymentService.AcceptPayment(params);
     }
+
+    @Get('/failPayment/:IdCourse/:Dni')
+    async Fail(@Param() params: resPaymentDto) {
+        return await this.paymentService.AcceptPayment(params);
+    }
+
     @Get('/whatsApp/:idCourse/:Dni')
      async WhatsApp(@Param() params: { idCourse: number, Dni: string }, @Res() res: Response) {
             const { idCourse, Dni } = params;
