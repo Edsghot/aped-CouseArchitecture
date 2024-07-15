@@ -32,7 +32,7 @@ export class PaymentController {
 
     @Get('/failPayment/:IdCourse/:Dni')
     async Fail(@Param() params: resPaymentDto) {
-        return await this.paymentService.AcceptPayment(params);
+        return await this.paymentService.FailPayment(params);
     }
 
     @Get('/whatsApp/:idCourse/:Dni')
