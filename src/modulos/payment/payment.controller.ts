@@ -4,6 +4,7 @@ import { FOLDER_PAYMENT } from 'src/Config/constantService';
 import { PaymentService } from './payment.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreatePaymentDto } from 'src/DTO/Payment/createPaymentDto.dto';
+import { resPaymentDto } from 'src/DTO/Payment/resPaymentDto.dto';
 
 @Controller('api/payment')
 export class PaymentController {
@@ -21,5 +22,11 @@ export class PaymentController {
         request.ImagePayment = res.secure_url;
 
         return await this.paymentService.insertPayment(request);
+    }
+
+    @Post('/acceptPayment')
+    async success(@Body() request: resPaymentDto){
+
+        return await this.paymentService.AcceptPayment(request);
     }
 }

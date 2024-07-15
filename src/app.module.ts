@@ -5,6 +5,7 @@ import { CourseModule } from './modulos/course/course.module';
 import { PaymentModule } from './modulos/payment/payment.module';
 import { CloudinaryService } from './cloudinary/cloudinary.service';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { AuthValidateModule } from './modulos/auth-validate/auth-validate.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -16,7 +17,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     database: 'nibcqvah_CourseArchitecture',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true
-}),UserModule, CourseModule,CloudinaryModule, PaymentModule],
+}),UserModule, CourseModule,CloudinaryModule, PaymentModule,AuthValidateModule],
   controllers: [],
   providers: [CloudinaryService],
 })

@@ -24,4 +24,6 @@ export class CreatePaymentDto {
 
     @IsString()
     ImagePayment: string;
+
+    Valid: boolean;
 }

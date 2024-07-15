@@ -28,4 +28,7 @@ export class PaymentEntity{
 
     @Column()
     ImagePayment: string;
+
+    @Column()
+    Valid: boolean;
 }

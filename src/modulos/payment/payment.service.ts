@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { PaymentEntity } from 'src/ENTITY/Payment.entity';
 import { ValidateService } from '../Validate/validate.service';
 import { CreatePaymentDto } from 'src/DTO/Payment/createPaymentDto.dto';
+import { AuthValidateService } from '../auth-validate/auth-validate.service';
+import {  resPaymentDto } from 'src/DTO/Payment/resPaymentDto.dto';
 
 @Injectable()
 export class PaymentService {
@@ -11,6 +13,7 @@ export class PaymentService {
     @InjectRepository(PaymentEntity)
     private readonly paymentRepository: Repository<PaymentEntity>,
     private readonly validateService: ValidateService,
+    private mailValidateService: AuthValidateService
   ) {}
 
   async insertPayment(request: CreatePaymentDto) {
@@ -39,15 +42,31 @@ export class PaymentService {
         return { msg: validationResponse.msg, success: validationResponse.success, data: null };
       }
 
-      // Check if payment with same DNI already exists
-      const existingPayment = await this.paymentRepository.findOne({ where: { Dni: request.Dni } });
-      if (existingPayment) {
-        return { msg: 'Ya se registró un pago con ese DNI', success: false, data: null };
-      }
-
-      // Create and save the new payment entity
+      await this.mailValidateService.sendMailUser(request);
+      request.Valid = false;
       const newPayment = this.paymentRepository.create(request);
       await this.paymentRepository.save(newPayment);
+
+      return { msg: 'Pago insertado exitosamente', success: true };
+    } catch (error) {
+      console.error('Error al insertar pago:', error);
+      return { msg: 'Error al insertar pago', detailMsg: error.message, success: false };
+    }
+  }
+
+  async AcceptPayment(request: resPaymentDto) {
+    try {
+
+        var payment = await this.paymentRepository.findOne({where:{IdCourse: request.IdCourse,Dni: request.Dni}});
+
+        if(!payment){
+            return{msg: "error del payment"}
+        }
+
+        var res = new CreatePaymentDto();
+            res.Mail = payment.Mail,
+        
+      await this.mailValidateService.sendPaymentSuccess(res);
 
       return { msg: 'Pago insertado exitosamente', success: true };
     } catch (error) {
