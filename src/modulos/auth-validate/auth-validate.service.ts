@@ -380,7 +380,7 @@ export class AuthValidateService {
       <p
         style="
           font-family: Verdana, Geneva, Tahoma, sans-serif;
-          color: #0F0F0F;
+          color: #0f0f0f;
           font-size: 32px;
           font-weight: bold;
           margin: 10px 0;
@@ -389,12 +389,12 @@ export class AuthValidateService {
         CONTROLZ
       </p>
     </div>
-    <div style="display: block;">
-        <div
+    <div style="display: block">
+      <div
         style="
           width: 80%;
           max-width: 600px;
-          background-color: #0F0F0F;
+          background-color: #0f0f0f;
           color: #ffffff;
           padding: 40px;
           margin: 20px auto;
@@ -425,7 +425,7 @@ export class AuthValidateService {
         <hr />
         <div style="margin-top: 30px; font-size: 16px; color: #fff">
           <p>
-            <span style="font-weight: bold; color: #f92f60; margin-bottom: 13px;"
+            <span style="font-weight: bold; color: #f92f60; margin-bottom: 13px"
               >Voucher:</span
             >
             <img
