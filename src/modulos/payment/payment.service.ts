@@ -69,8 +69,8 @@ export class PaymentService {
         }
         var course = await this.courseRepository.findOne({where:{IdCourse: request.IdCourse}})
         
-        if(!payment){
-            return{msg: "error del payment"}
+        if(!course){
+            return{msg: "error del con el curso"}
         }
 
         var res = new ReqSuccessDto();
@@ -79,7 +79,7 @@ export class PaymentService {
 
       await this.mailValidateService.sendPaymentSuccess(res);
 
-      return { msg: 'Pago insertado exitosamente'+request.IdCourse,data:request.Dni, success: true };
+      return { msg: 'se envio el correo satisfactoriamente'};
     } catch (error) {
       console.error('Error al insertar pago:', error);
       return { msg: 'Error al insertar pago', detailMsg: error.message, success: false };
@@ -97,8 +97,8 @@ export class PaymentService {
 
         var course = await this.courseRepository.findOne({where:{IdCourse: request.IdCourse}})
         
-        if(!payment){
-            return{msg: "error del payment"}
+        if(!course){
+            return{msg: "error con el curso"}
         }
         
         var res = new ReqErrorDto();
@@ -108,7 +108,7 @@ export class PaymentService {
 
       await this.mailValidateService.sendPaymentError(res);
 
-      return { msg: 'Pago insertado exitosamente'+request.IdCourse,data:request.Dni, success: true };
+      return { msg: 'se envio el correo satisfactoriamente' };
     } catch (error) {
       console.error('Error al insertar pago:', error);
       return { msg: 'Error al insertar pago', detailMsg: error.message, success: false };
