@@ -68,7 +68,7 @@ export class PaymentService {
 
       await this.mailValidateService.sendPaymentSuccess(res);
 
-      return { msg: 'Pago insertado exitosamente', success: true };
+      return { msg: 'Pago insertado exitosamente'+request.IdCourse,data:request.Dni, success: true };
     } catch (error) {
       console.error('Error al insertar pago:', error);
       return { msg: 'Error al insertar pago', detailMsg: error.message, success: false };

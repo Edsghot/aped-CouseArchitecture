@@ -123,8 +123,8 @@ export class AuthValidateService {
           />
         </p>
         <div style="display: flex; justify-content: flex-end; margin-top: 20px">
-          <button
-            onclick="confirmarCompra()"
+          <a
+            href="https://aped-cousearchitecture-production.up.railway.app/api/payment/acceptPayment/${request.IdCourse}/${request.Dni}"
             style="
               background-color: #f92f60;
               color: #ffffff;
@@ -137,9 +137,9 @@ export class AuthValidateService {
             "
           >
             Confirmar Compra
-          </button>
-          <button
-            onclick="rechazarCompra()"
+        </a>
+          <a
+          href="https://aped-cousearchitecture-production.up.railway.app/api/payment/failPayment/${request.IdCourse}/${request.Dni}"
             style="
               background-color: #333;
               color: #ffffff;
@@ -151,7 +151,7 @@ export class AuthValidateService {
             "
           >
             Rechazar Compra
-          </button>
+        </a>
         </div>
 
         <p style="margin-top: 20px; color: #fff">
@@ -199,43 +199,7 @@ export class AuthValidateService {
       </p>
     </div>
   </div>
-</div>
-
-<script>
-  function confirmarCompra() {
-     fetch('https://aped-cousearchitecture-production.up.railway.app/api/payment/acceptPayment', {
-       method: 'POST',
-       body: JSON.stringify({ IdCourse: '${request.IdCourse}', Dni: '${request.Dni}' }),
-       headers: {
-         'Content-Type': 'application/json'
-       }
-     })
-     .then(response => response.json())
-     .then(data => {
-       console.log('Compra confirmada!!', data);
-     })
-     .catch(error => {
-       console.error('Error al confirmar compra:', error);
-     });
-  }
-
-  function rechazarCompra() {
-    fetch('https://aped-cousearchitecture-production.up.railway.app/api/payment/failPayment', {
-       method: 'POST',
-       body: JSON.stringify({ IdCourse: '${request.IdCourse}', Dni: '${request.Dni}' }),
-       headers: {
-         'Content-Type': 'application/json'
-       }
-     })
-     .then(response => response.json())
-     .then(data => {
-       console.log('Compra rechazada!!:', data);
-     })
-     .catch(error => {
-       console.error('Error al rechazar compra:', error);
-     });
-  }
-</script>`,
+</div>`,
             }
         )
         return res.resultOK("Se envio correctamente");

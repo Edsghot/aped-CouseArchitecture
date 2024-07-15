@@ -1,10 +1,11 @@
-import { Body, Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { FOLDER_PAYMENT } from 'src/Config/constantService';
 import { PaymentService } from './payment.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreatePaymentDto } from 'src/DTO/Payment/createPaymentDto.dto';
 import { resPaymentDto } from 'src/DTO/Payment/resPaymentDto.dto';
+import { Response } from 'express';
 
 @Controller('api/payment')
 export class PaymentController {
@@ -24,9 +25,18 @@ export class PaymentController {
         return await this.paymentService.insertPayment(request);
     }
 
-    @Post('/acceptPayment')
-    async success(@Body() request: resPaymentDto){
-
-        return await this.paymentService.AcceptPayment(request);
+    @Get('/acceptPayment/:IdCourse/:Dni')
+    async success(@Param() params: resPaymentDto) {
+        return await this.paymentService.AcceptPayment(params);
     }
+    @Get('/whatsApp/:idCourse/:Dni')
+     async WhatsApp(@Param() params: { idCourse: number, Dni: string }, @Res() res: Response) {
+            const { idCourse, Dni } = params;
+            const message = `Curso ID: ${idCourse}, DNI: ${Dni}. Aquí está la imagen: `;
+            const phoneNumber = '51983805438'; // Número de teléfono en formato internacional
+            const imageUrl = 'https://res.cloudinary.com/dbdfy2iui/image/upload/v1721004351/Xnor/Payment/jhzl2cjulcheltc2p0xi.jpg'; // URL de la imagen
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message + imageUrl)}`;
+    
+            return res.redirect(whatsappUrl);
+        }
 }
