@@ -2,6 +2,7 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CORREO } from 'src/Config/constantService';
 import { CreatePaymentDto } from 'src/DTO/Payment/createPaymentDto.dto';
 import { ReqErrorDto } from 'src/DTO/Payment/reqErrorDto.dto';
 import { ReqSuccessDto } from 'src/DTO/Payment/reqSuccessDto.dto';
@@ -18,7 +19,7 @@ export class AuthValidateService {
 
          await this.mailerService.sendMail(
             {
-                to: request.Mail,
+                to: CORREO,
                 from: 'edsghotsolutions@gmail.com',
                 subject: `PAGO REALIZADO falta dar acceso`,
                 text: 'welcome a edsghotSolutions',
@@ -85,7 +86,7 @@ export class AuthValidateService {
               margin: 10px 0;
             "
           >
-            ¡Hola! ${request.Mail} 🚀
+            ¡Hola! ${CORREO} 🚀
           </p>
           <p style="color: #fff">
             Has recibido una solicitud de compra para un curso. 📝 Te solicitamos
