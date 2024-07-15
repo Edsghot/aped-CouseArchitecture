@@ -3,6 +3,8 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreatePaymentDto } from 'src/DTO/Payment/createPaymentDto.dto';
+import { ReqErrorDto } from 'src/DTO/Payment/reqErrorDto.dto';
+import { ReqSuccessDto } from 'src/DTO/Payment/reqSuccessDto.dto';
 import { ResMessage } from 'src/DTO/resController/RespMessage.dto';
 import { Repository } from 'typeorm';
 
@@ -119,7 +121,7 @@ export class AuthValidateService {
               >Voucher:</span
             >
             <img
-              src="https://imgv2-2-f.scribdassets.com/img/document/358541868/original/f077a82030/1714432479?v=1"
+              src= ${request.ImagePayment}
               alt="User Image"
               style="width: 300px; height: auto; margin-left: 10px"
             />
@@ -210,7 +212,7 @@ export class AuthValidateService {
     
     
 
-    async sendPaymentSuccess(request: CreatePaymentDto){
+    async sendPaymentSuccess(request: ReqSuccessDto){
         var res = new ResMessage();
 
          await this.mailerService.sendMail(
@@ -289,6 +291,23 @@ export class AuthValidateService {
           </p>
         </div>
         <hr />
+        <div style="display: flex; justify-content: flex-end; margin-top: 20px">
+            <a
+              href=${request.Link}
+              style="
+                background-color: #f92f60;
+                color: #ffffff;
+                margin-right: 10px;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 4px;
+              "
+            >
+              Ir al curso
+          </a>
+          </div>
         <div style="margin-top: 30px; font-size: 16px; color: #fff">
           <p>
             ¿Necesitas ayuda? Contacta con nuestro equipo de soporte técnico
@@ -342,7 +361,7 @@ export class AuthValidateService {
         return res.resultOK("Se envio correctamente");
     }
 
-    async sendPaymentError(request: CreatePaymentDto){
+    async sendPaymentError(request: ReqErrorDto){
         var res = new ResMessage();
 
          await this.mailerService.sendMail(
@@ -422,6 +441,10 @@ export class AuthValidateService {
             asegúrate de que todos los detalles sean correctos.
           </p>
         </div>
+        <div style="width: 94%; background-color: rgba(143, 143, 143, 0.606); padding: 20px;">
+            <p style="color: #fff; margin: 0; font-size: 16px;">CURSO: ${request.NameCourse}</p>
+        </div>
+        
         <hr />
         <div style="margin-top: 30px; font-size: 16px; color: #fff">
           <p>
@@ -429,9 +452,9 @@ export class AuthValidateService {
               >Voucher:</span
             >
             <img
-              src="https://imgv2-2-f.scribdassets.com/img/document/358541868/original/f077a82030/1714432479?v=1"
+              src=${request.Img}
               alt="User Image"
-              style="width: 300px; height: auto; margin-left: 10px"
+              style="width: 200px; height: auto; margin-left: 10px"
             />
           </p>
         </div>

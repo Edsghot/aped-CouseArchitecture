@@ -19,6 +19,9 @@ export class CourseEntity {
     TeacherName: string;
 
     @Column()
+    Link: string;
+
+    @Column()
     Category: string; // Updated from 'Clasifier' to 'Category' for clarity
 
     @Column()

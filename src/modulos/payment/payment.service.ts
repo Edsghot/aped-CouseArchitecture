@@ -6,12 +6,17 @@ import { ValidateService } from '../Validate/validate.service';
 import { CreatePaymentDto } from 'src/DTO/Payment/createPaymentDto.dto';
 import { AuthValidateService } from '../auth-validate/auth-validate.service';
 import {  resPaymentDto } from 'src/DTO/Payment/resPaymentDto.dto';
+import { CourseEntity } from 'src/ENTITY/Course.entity';
+import { ReqErrorDto } from 'src/DTO/Payment/reqErrorDto.dto';
+import { ReqSuccessDto } from 'src/DTO/Payment/reqSuccessDto.dto';
 
 @Injectable()
 export class PaymentService {
   constructor(
     @InjectRepository(PaymentEntity)
     private readonly paymentRepository: Repository<PaymentEntity>,
+    @InjectRepository(CourseEntity)
+    private readonly courseRepository: Repository<CourseEntity>,
     private readonly validateService: ValidateService,
     private mailValidateService: AuthValidateService
   ) {}
@@ -62,8 +67,15 @@ export class PaymentService {
         if(!payment){
             return{msg: "error del payment"}
         }
-        var res = new CreatePaymentDto();
-            res.Mail = payment.Mail,
+        var course = await this.courseRepository.findOne({where:{IdCourse: request.IdCourse}})
+        
+        if(!payment){
+            return{msg: "error del payment"}
+        }
+
+        var res = new ReqSuccessDto();
+            res.Mail = payment.Mail;
+            res.Link = course.Link;
 
       await this.mailValidateService.sendPaymentSuccess(res);
 
@@ -82,8 +94,17 @@ export class PaymentService {
         if(!payment){
             return{msg: "error del payment"}
         }
-        var res = new CreatePaymentDto();
-            res.Mail = payment.Mail,
+
+        var course = await this.courseRepository.findOne({where:{IdCourse: request.IdCourse}})
+        
+        if(!payment){
+            return{msg: "error del payment"}
+        }
+        
+        var res = new ReqErrorDto();
+            res.Mail = payment.Mail;
+            res.NameCourse = course.Name;
+            res.Img = payment.ImagePayment;
 
       await this.mailValidateService.sendPaymentError(res);
 
