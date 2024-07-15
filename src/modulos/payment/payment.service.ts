@@ -56,16 +56,16 @@ export class PaymentService {
 
   async AcceptPayment(request: resPaymentDto) {
     try {
-
+/*
         var payment = await this.paymentRepository.findOne({where:{IdCourse: request.IdCourse,Dni: request.Dni}});
 
         if(!payment){
             return{msg: "error del payment"}
         }
-
+*/
         var res = new CreatePaymentDto();
-            res.Mail = payment.Mail,
-        
+            res.Mail = "edsghot@gmail.com",
+
       await this.mailValidateService.sendPaymentSuccess(res);
 
       return { msg: 'Pago insertado exitosamente', success: true };

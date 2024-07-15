@@ -49,7 +49,7 @@ export class AuthValidateService {
       <p
         style="
           font-family: Verdana, Geneva, Tahoma, sans-serif;
-          color: #0F0F0F;
+          color: #0f0f0f;
           font-size: 32px;
           font-weight: bold;
           margin: 10px 0;
@@ -62,7 +62,7 @@ export class AuthValidateService {
       style="
         width: 80%;
         max-width: 600px;
-        background-color: #0F0F0F;
+        background-color: #0f0f0f;
         color: #ffffff;
         padding: 40px;
         margin: 20px auto;
@@ -84,32 +84,83 @@ export class AuthValidateService {
           ¡Hola! ${request.Mail} 🚀
         </p>
         <p style="color: #fff">
-            Has recibido una solicitud de compra para un curso. 📝 Te solicitamos revisar detalladamente el comprobante de pago adjunto para proceder con la confirmación de compra. Una vez verificado el voucher de pago, procederemos a completar la solicitud. ✅
+          Has recibido una solicitud de compra para un curso. 📝 Te solicitamos
+          revisar detalladamente el comprobante de pago adjunto para proceder
+          con la confirmación de compra. Una vez verificado el voucher de pago,
+          procederemos a completar la solicitud. ✅
         </p>
       </div>
       <hr />
       <div style="margin-top: 30px; font-size: 16px; color: #fff">
         <p>
-            <span style="font-weight: bold; color: #F92F60; margin-bottom: 13px;">Nombres:</span>${request.FirstName} <br />
-           <span style="font-weight: bold; color: #F92F60; margin-bottom: 13px;">Apellidos:</span> ${request.LastName} <br />
-           <span style="font-weight: bold; color: #F92F60; margin-bottom: 13px;">Dni:</span> ${request.Dni} <br />
-           <span style="font-weight: bold; color: #F92F60; margin-bottom: 13px;">Teléfono:</span> ${request.PhoneNumber} <br />
-           <span style="font-weight: bold; color: #F92F60; margin-bottom: 13px;">Gmail:</span> ${request.Mail} <br />
+          <span style="font-weight: bold; color: #f92f60; margin-bottom: 13px"
+            >Nombres:</span
+          >${request.FirstName} <br />
+          <span style="font-weight: bold; color: #f92f60; margin-bottom: 13px"
+            >Apellidos:</span
+          >
+          ${request.LastName} <br />
+          <span style="font-weight: bold; color: #f92f60; margin-bottom: 13px"
+            >Dni:</span
+          >
+          ${request.Dni} <br />
+          <span style="font-weight: bold; color: #f92f60; margin-bottom: 13px"
+            >Teléfono:</span
+          >
+          ${request.PhoneNumber} <br />
+          <span style="font-weight: bold; color: #f92f60; margin-bottom: 13px"
+            >Gmail:</span
+          >
+          ${request.Mail} <br />
 
-           <span style="font-weight: bold; color: #F92F60; margin-bottom: 13px;">Vocuher:</span>
+          <span style="font-weight: bold; color: #f92f60; margin-bottom: 13px"
+            >Voucher:</span
+          >
           <img
-            src=${request.ImagePayment}
+            src="https://imgv2-2-f.scribdassets.com/img/document/358541868/original/f077a82030/1714432479?v=1"
             alt="User Image"
             style="width: 300px; height: auto; margin-left: 10px"
           />
         </p>
-        <p>
+        <div style="display: flex; justify-content: flex-end; margin-top: 20px">
+          <button
+            onclick="confirmarCompra()"
+            style="
+              background-color: #f92f60;
+              color: #ffffff;
+              margin-right: 10px;
+              border: none;
+              padding: 10px 20px;
+              font-size: 16px;
+              cursor: pointer;
+              border-radius: 4px;
+            "
+          >
+            Confirmar Compra
+          </button>
+          <button
+            onclick="rechazarCompra()"
+            style="
+              background-color: #333;
+              color: #ffffff;
+              border: none;
+              padding: 10px 20px;
+              font-size: 16px;
+              cursor: pointer;
+              border-radius: 4px;
+            "
+          >
+            Rechazar Compra
+          </button>
+        </div>
+
+        <p style="margin-top: 20px; color: #fff">
           ¿Necesitas ayuda? Contacta con nuestro equipo de soporte técnico
           <a
             href="https://jheysonjhairpro.ccontrolz.com/"
             target="_blank"
             style="
-              color: #F92F60;
+              color: #f92f60;
               text-decoration: none;
               font-weight: bold;
               font-size: 14px;
@@ -120,7 +171,7 @@ export class AuthValidateService {
             href="https://jheysonjhairpro.ccontrolz.com/"
             target="_blank"
             style="
-              color: #F92F60;
+              color: #f92f60;
               text-decoration: none;
               font-weight: bold;
               font-size: 14px;
@@ -130,14 +181,14 @@ export class AuthValidateService {
         </p>
       </div>
     </div>
-    <div   font-size: 13px; color: #000">
+    <div style="margin-top: 30px; font-size: 13px; color: #000">
       <p>
         Enviado por Developers,
         <a
           href="https://jheysonjhairpro.ccontrolz.com/"
           target="_blank"
           style="
-            color: #F92F60;
+            color: #f92f60;
             text-decoration: none;
             font-weight: bold;
             font-size: 14px;
@@ -148,7 +199,43 @@ export class AuthValidateService {
       </p>
     </div>
   </div>
-</div>`,
+</div>
+
+<script>
+  function confirmarCompra() {
+     fetch('https://aped-cousearchitecture-production.up.railway.app/api/payment/acceptPayment', {
+       method: 'POST',
+       body: JSON.stringify({ IdCourse: '${request.IdCourse}', Dni: '${request.Dni}' }),
+       headers: {
+         'Content-Type': 'application/json'
+       }
+     })
+     .then(response => response.json())
+     .then(data => {
+       console.log('Compra confirmada!!', data);
+     })
+     .catch(error => {
+       console.error('Error al confirmar compra:', error);
+     });
+  }
+
+  function rechazarCompra() {
+    fetch('https://aped-cousearchitecture-production.up.railway.app/api/payment/failPayment', {
+       method: 'POST',
+       body: JSON.stringify({ IdCourse: '${request.IdCourse}', Dni: '${request.Dni}' }),
+       headers: {
+         'Content-Type': 'application/json'
+       }
+     })
+     .then(response => response.json())
+     .then(data => {
+       console.log('Compra rechazada!!:', data);
+     })
+     .catch(error => {
+       console.error('Error al rechazar compra:', error);
+     });
+  }
+</script>`,
             }
         )
         return res.resultOK("Se envio correctamente");
