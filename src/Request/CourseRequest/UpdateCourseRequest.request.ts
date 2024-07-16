@@ -39,4 +39,7 @@ export class UpdateCourseRequest{
     @IsString()
     @IsOptional()
     ImageUrl?: string;
+
+    @IsString()
+    Link: string;
 }

@@ -27,4 +27,7 @@ export class CreateCourseRequest{
   
     @IsString()
     ImageUrl: string;
+
+    @IsString()
+    Link: string;
 }

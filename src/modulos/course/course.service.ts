@@ -25,6 +25,7 @@ export class CourseService {
         Level: request.Level,
         EnrollmentCount: request.EnrollmentCount,
         ImageUrl: request.ImageUrl,
+        Link: request.Link,
       });
 
       await this.courseRepository.save(newCourse);
@@ -55,6 +56,7 @@ export class CourseService {
       course.EnrollmentCount = updateCourseDto.EnrollmentCount;
       course.ImageUrl = updateCourseDto.ImageUrl;
       course.UpdatedAt = new Date();
+      course.Link = updateCourseDto.Link;
 
       await this.courseRepository.save(course);
 
