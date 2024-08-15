@@ -10,7 +10,7 @@ import { AuthValidateModule } from './modulos/auth-validate/auth-validate.module
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
-    host: 'casaverde.primeraza.com',
+    host: 'primeraza.com',
     port: 3306,
     username: 'u875102609_luis',
     password: '0Xnor.dev1',
