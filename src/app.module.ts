@@ -10,11 +10,11 @@ import { AuthValidateModule } from './modulos/auth-validate/auth-validate.module
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
-    host: 'primeraza.com',
+    host: 'jhedgost.com',
     port: 3306,
-    username: 'u875102609_luis',
-    password: '0Xnor.dev1',
-    database: 'u875102609_architecture',
+    username: 'dbjhfjuv_edsghot',
+    password: 'Repro321.',
+    database: 'dbjhfjuv_CourseXnor',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true
 }),UserModule, CourseModule,CloudinaryModule, PaymentModule,AuthValidateModule],
